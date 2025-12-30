@@ -40,7 +40,7 @@ const AdminLogin: React.FC = () => {
   return (
     <div className="login-root">
       <div className="promo-panel">
-        <div className="promo-logo">BOWIZZY</div>
+        <div className="promo-logo">BOWIZZY ADMIN</div>
         <div className="promo-content">
           <h2>Prep for interviews.</h2>
           <h2>Grow your career.</h2>
@@ -81,7 +81,31 @@ const AdminLogin: React.FC = () => {
                   className="eye-btn"
                   onClick={() => setShowPassword((s) => !s)}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {/* Inline SVG icons so no new dependency is required */}
+                  {showPassword ? (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M3 3l18 18" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M9.88 9.88A3 3 0 0 0 14.12 14.12" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M10.7 5.1c1.3-.15 2.62-.11 3.9.12 3.9.74 6.4 4.51 6.4 4.51s-2.5 3.76-6.4 4.51c-4.16.8-8.6-2.5-9.95-4.08" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="12" cy="12" r="3" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
                 </button>
               </div>
             </label>

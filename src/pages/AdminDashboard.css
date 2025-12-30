@@ -1,0 +1,73 @@
+.admin-root {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #fdeee0;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: 800;
+  color: #f07a2e;
+  font-size: 20px;
+}
+
+.nav {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.nav-item { color: #213547; text-decoration: none; cursor: pointer; }
+.nav-item.active { font-weight: 700; }
+
+.logout-btn {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.main {
+  flex: 1 1 auto;
+  padding: 18px 36px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+}
+
+.main-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px }
+.main-header h2 { margin:0 }
+.sub { color: #777; font-size: 13px }
+
+.header-actions { display:flex; gap:8px }
+.pill { border-radius:6px; border:1px solid rgba(0,0,0,0.08); padding:6px 10px; background:#fff }
+
+.stats-row { display:flex; gap:18px; margin-bottom:20px }
+.stat-card { background:#fff; border-radius:10px; padding:18px; flex:1; box-shadow: 0 6px 18px rgba(11,21,27,0.06); min-height:92px; display:flex; flex-direction:column; justify-content:space-between }
+.stat-label { color:#777; font-size:13px }
+.stat-number { font-size:28px; font-weight:700; color:#213547 }
+.small-btn { align-self:flex-start; background: linear-gradient(90deg,#ff8a4a,#ffb25b); border:none; color:#fff; padding:8px 12px; border-radius:6px; cursor:pointer }
+
+.lists-row { display:flex; gap:18px; margin-top:12px }
+.list-card { background:#fff; border-radius:10px; padding:14px; flex:1; box-shadow: 0 6px 18px rgba(11,21,27,0.04) }
+.list-card h4 { margin:0 0 12px 0 }
+.list-card table { width:100%; border-collapse: collapse; font-size:13px }
+.list-card th { text-align:left; color:#666; font-weight:600; padding-bottom:8px }
+.list-card td { padding:6px 0 }
+.mono { color:#334; font-family: monospace; font-size:13px }
+.tiny { padding:6px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background:#fff; cursor:pointer }
+
+@media (max-width: 900px) {
+  .admin-root { flex-direction: column }
+  .sidebar { width:100%; flex-direction:row; align-items:center; gap:20px }
+  .main { padding:16px }
+  .stats-row, .lists-row { flex-direction:column }
+}

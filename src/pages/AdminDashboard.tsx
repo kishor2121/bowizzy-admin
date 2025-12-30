@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout, getInterviewers } from "../services/admin";
+import { logout, getInterviewers, confirmInterviewer } from "../services/admin";
 import "./AdminDashboard.css";
 
 const pendingUsers = [
@@ -31,6 +31,7 @@ const AdminDashboard: React.FC = () => {
   const [pendingUsers, setPendingUsers] = useState<Array<any>>([]);
   const [loadingPending, setLoadingPending] = useState(false);
   const [pendingError, setPendingError] = useState<string | null>(null);
+  const [confirmingIds, setConfirmingIds] = useState<Array<number | string>>([]);
 
   useEffect(() => {
     let mounted = true;
@@ -40,7 +41,19 @@ const AdminDashboard: React.FC = () => {
       .then((res) => {
         if (!mounted) return;
         // response is an array of users; pending users are those not verified
-        const pending = (res || []).filter((u: any) => !u.is_verified);
+        // backend may use boolean or string values (e.g. "requesting"). Treat only
+        // explicit truthy/verified values as verified; everything else is pending.
+        const isVerified = (u: any) => {
+          const v = u.is_interviewer_verified;
+          if (v === true || v === "true" || v === "verified" || v === 1) return true;
+          return false;
+        };
+        const pending = (res || []).filter((u: any) => {
+          if (typeof u.is_interviewer_verified !== "undefined" && u.is_interviewer_verified !== null) {
+            return !isVerified(u);
+          }
+          return !u.is_verified;
+        });
         setPendingUsers(pending);
       })
       .catch((err) => {
@@ -144,7 +157,28 @@ const AdminDashboard: React.FC = () => {
                   <tr key={u.user_id || u.email}>
                     <td>{[u.first_name, u.middle_name, u.last_name].filter(Boolean).join(" ") || u.email}</td>
                     <td className="mono">{u.email}</td>
-                    <td><button className="tiny">Confirm</button></td>
+                    <td>
+                      <button
+                        className="tiny"
+                        disabled={confirmingIds.includes(u.user_id)}
+                        onClick={async () => {
+                          const id = u.user_id || u.email;
+                          setConfirmingIds((prev) => [...prev, id]);
+                          try {
+                            // update backend to mark interviewer verified (send boolean true)
+                            await confirmInterviewer(u.user_id);
+                            // remove from pending list
+                            setPendingUsers((prev) => prev.filter((p) => (p.user_id || p.email) !== id));
+                          } catch (err) {
+                            setPendingError(err?.response?.data?.message || err?.message || "Failed to confirm user");
+                          } finally {
+                            setConfirmingIds((prev) => prev.filter((x) => x !== id));
+                          }
+                        }}
+                      >
+                        {confirmingIds.includes(u.user_id) ? "Confirming..." : "Confirm"}
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

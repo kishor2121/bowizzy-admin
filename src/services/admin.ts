@@ -24,6 +24,14 @@ export async function updateUser(id: number | string, data: Record<string, any>)
   return res.data;
 }
 
+// Convenience helper to confirm an interviewer; ensure we send a boolean true
+export async function confirmInterviewer(id: number | string) {
+  // send boolean true (some backends accept string but boolean is canonical)
+  const payload = { is_interviewer_verified: true };
+  const res = await api.put(`/admin/users/${id}`, payload);
+  return res.data;
+}
+
 export async function getResumes() {
   const res = await api.get(`/admin/resumes`);
   return res.data;
@@ -61,4 +69,4 @@ export async function authLogin(credentials: { email: string; password: string }
   return res.data;
 }
 
-export default { getInterviewers, getUsers, updateUser, getResumes, setAuthToken, loginAdmin, authLogin, logout };
+export default { getInterviewers, getUsers, updateUser, confirmInterviewer, getResumes, setAuthToken, loginAdmin, authLogin, logout };

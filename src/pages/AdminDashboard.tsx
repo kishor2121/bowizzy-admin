@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { logout, getInterviewers, confirmInterviewer } from "../services/admin";
 import "./AdminDashboard.css";
 
@@ -73,10 +73,21 @@ const AdminDashboard: React.FC = () => {
           <div className="logo">BOWIZZY</div>
 
           <nav className="nav">
-            <a className="nav-item active">Overview</a>
-            <a className="nav-item">Users</a>
-            <a className="nav-item">Interviews</a>
-            <a className="nav-item">Resumes</a>
+            <NavLink to="/admin/dashboard" end className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+              Overview
+            </NavLink>
+            <NavLink to="/admin/users" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+              Users
+            </NavLink>
+            <NavLink to="/admin/interviews" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+              Interviews
+            </NavLink>
+            <NavLink to="/admin/resumes" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+              Resumes
+            </NavLink>
+            <NavLink to="/admin/plans" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+              Plans
+            </NavLink>
           </nav>
 
           <div className="sidebar-footer">
@@ -187,7 +198,6 @@ const AdminDashboard: React.FC = () => {
               </table>
             </div>
           </div>
-
           <div className="list-card">
             <h4>Upcoming Interview Confirmations</h4>
             <table>
@@ -205,7 +215,6 @@ const AdminDashboard: React.FC = () => {
               </tbody>
             </table>
           </div>
-
           <div className="list-card">
             <h4>Recent Resumes</h4>
             <table>
@@ -223,6 +232,8 @@ const AdminDashboard: React.FC = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Plan widget moved to separate Plans page */}
           </section>
         </div>
       </main>

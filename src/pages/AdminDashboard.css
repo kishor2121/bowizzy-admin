@@ -45,8 +45,8 @@
   flex-direction: column;
   gap: 10px;
 }
-.nav-item { color: #213547; text-decoration: none; cursor: pointer; padding: 6px 8px; border-radius: 6px; }
-.nav-item.active { font-weight: 700; background: rgba(240,120,40,0.06); color: #f07a2e }
+.nav-item { color: #213547; text-decoration: none; cursor: pointer; padding: 8px 10px; border-radius: 8px; display:inline-block }
+.nav-item.active { font-weight: 700; background: rgba(240,120,40,0.08); color: #f07a2e }
 
 .sidebar-footer { display:flex; justify-content:flex-start }
 
@@ -97,6 +97,16 @@
 
 .lists-row { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; margin-top:12px }
 .list-card { background:#fff; border-radius:10px; padding:18px; box-shadow: 0 6px 18px rgba(11,21,27,0.04) }
+.plan-card { display:flex; gap:14px; align-items:center }
+.pie-wrap { width:120px; height:120px; display:flex; align-items:center; justify-content:center }
+.pie { width:110px; height:110px; border-radius:50%; display:flex; align-items:center; justify-content:center }
+.pie-center { width:56px; height:56px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-weight:700 }
+.pie-empty { color:#999 }
+.plan-legend { display:flex; flex-direction:column; gap:8px }
+.legend-item { display:flex; gap:10px; align-items:center }
+.legend-swatch { width:14px; height:14px; border-radius:4px; display:inline-block }
+.legend-label { font-size:13px; color:#444 }
+.legend-value { font-size:13px; color:#777 }
 .list-card h4 { margin:0 0 12px 0 }
 .list-card table { width:100%; border-collapse: collapse; font-size:13px }
 .list-card th { text-align:left; color:#666; font-weight:600; padding-bottom:8px }

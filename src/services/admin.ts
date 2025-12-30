@@ -37,6 +37,11 @@ export async function getResumes() {
   return res.data;
 }
 
+export async function getUserPlanStats() {
+  const res = await api.get(`/admin/user-plan-stats`);
+  return res.data;
+}
+
 // Helper to set the auth token for subsequent requests
 export function setAuthToken(token?: string | null) {
   setApiAuthToken(token ?? null);

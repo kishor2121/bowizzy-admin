@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../services/admin";
+import { logout, getInterviewers } from "../services/admin";
 import "./AdminDashboard.css";
 
 const pendingUsers = [
@@ -28,6 +28,35 @@ const AdminDashboard: React.FC = () => {
     };
   }, []);
   const navigate = useNavigate();
+  const [pendingUsers, setPendingUsers] = useState<Array<any>>([]);
+  const [loadingPending, setLoadingPending] = useState(false);
+  const [pendingError, setPendingError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoadingPending(true);
+    setPendingError(null);
+    getInterviewers()
+      .then((res) => {
+        if (!mounted) return;
+        // response is an array of users; pending users are those not verified
+        const pending = (res || []).filter((u: any) => !u.is_verified);
+        setPendingUsers(pending);
+      })
+      .catch((err) => {
+        // show a friendly message (don't leak raw errors)
+        setPendingError(err?.response?.data?.message || err?.message || "Failed to load pending users");
+      })
+      .finally(() => {
+        if (mounted) setLoadingPending(false);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const pendingCount = pendingUsers.length;
+
   return (
     <div className="admin-root">
       <aside className="sidebar">
@@ -75,7 +104,7 @@ const AdminDashboard: React.FC = () => {
         <section className="stats-row">
           <div className="stat-card">
             <div className="stat-label">Pending User Confirmations</div>
-            <div className="stat-number">12</div>
+            <div className="stat-number">{loadingPending ? "..." : pendingCount}</div>
             <button className="small-btn">Manage</button>
           </div>
 
@@ -93,22 +122,34 @@ const AdminDashboard: React.FC = () => {
         </section>
 
         <section className="lists-row">
-          <div className="list-card">
+          <div className="list-card pending-card">
             <h4>Recent Pending Users</h4>
-            <table>
+            <div className="table-scroll">
+              <table>
               <thead>
                 <tr><th>Name</th><th>Email</th><th>Action</th></tr>
               </thead>
               <tbody>
-                {pendingUsers.map((u) => (
-                  <tr key={u.email}>
-                    <td>{u.name}</td>
+                {loadingPending && (
+                  <tr>
+                    <td colSpan={3}>Loading...</td>
+                  </tr>
+                )}
+                {pendingError && (
+                  <tr>
+                    <td colSpan={3} className="error-text">{pendingError}</td>
+                  </tr>
+                )}
+                {!loadingPending && !pendingError && pendingUsers.map((u) => (
+                  <tr key={u.user_id || u.email}>
+                    <td>{[u.first_name, u.middle_name, u.last_name].filter(Boolean).join(" ") || u.email}</td>
                     <td className="mono">{u.email}</td>
                     <td><button className="tiny">Confirm</button></td>
                   </tr>
                 ))}
               </tbody>
-            </table>
+              </table>
+            </div>
           </div>
 
           <div className="list-card">

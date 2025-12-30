@@ -65,6 +65,24 @@
 .mono { color:#334; font-family: monospace; font-size:13px }
 .tiny { padding:6px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background:#fff; cursor:pointer }
 
+.error-text { color: #b00020; font-size: 13px }
+
+/* Make pending users card scrollable when list is long */
+.pending-card .table-scroll {
+  max-height: 300px; /* adjust as needed */
+  overflow: auto;
+}
+
+/* Keep header visible while scrolling */
+.pending-card table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 @media (max-width: 900px) {
   .admin-root { flex-direction: column }
   .sidebar { width:100%; flex-direction:row; align-items:center; gap:20px }

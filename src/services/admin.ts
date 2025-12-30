@@ -1,6 +1,15 @@
 import api, { setAuthToken as setApiAuthToken } from "./api";
 
 export async function getInterviewers() {
+
+  try {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setApiAuthToken(token);
+      console.log("[getInterviewers] using token from localStorage (masked)", token.slice(0, 12) + "...");
+    }
+  } catch (e) {}
+
   const res = await api.get(`/admin/interviewers`);
   return res.data;
 }
@@ -44,14 +53,11 @@ export async function loginAdmin(credentials: { email: string; password: string 
 }
 
 export async function authLogin(credentials: { email: string; password: string }) {
-  // include explicit type to satisfy API contract
   const payload = { ...credentials, type: "login" };
-  // safe logging: avoid printing sensitive fields like password
-  // eslint-disable-next-line no-console
   console.log("[authLogin] login attempt ->", { email: credentials.email, type: payload.type });
   const res = await api.post(`/auth`, payload);
-  // store token if returned (common shape: { token: "..." })
-  if (res.data && res.data.token) setAuthToken(res.data.token);
+  const token = res?.data?.token || res?.data?.accessToken || res?.data?.jwt || res?.data?.data?.token;
+  if (token) setAuthToken(token);
   return res.data;
 }
 

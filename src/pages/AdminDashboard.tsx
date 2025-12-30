@@ -69,27 +69,33 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="admin-root">
       <aside className="sidebar">
-        <div className="logo">BOWIZZY</div>
-        <nav className="nav">
-          <a className="nav-item active">Overview</a>
-          <a className="nav-item">Users</a>
-          <a className="nav-item">Interviews</a>
-          <a className="nav-item">Resumes</a>
-        </nav>
+        <div className="sidebar-card">
+          <div className="logo">BOWIZZY</div>
 
-        <button
-          className="logout-btn"
-          onClick={() => {
-            logout();
-            navigate("/login");
-          }}
-        >
-          Logout
-        </button>
+          <nav className="nav">
+            <a className="nav-item active">Overview</a>
+            <a className="nav-item">Users</a>
+            <a className="nav-item">Interviews</a>
+            <a className="nav-item">Resumes</a>
+          </nav>
+
+          <div className="sidebar-footer">
+            <button
+              className="logout-btn"
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
       </aside>
 
       <main className="main">
-        <header className="main-header">
+        <div className="main-inner">
+          <header className="main-header">
           <div>
             <h2>Welcome to BoWizzy Admin</h2>
             <div className="sub">superadmin</div>
@@ -108,9 +114,9 @@ const AdminDashboard: React.FC = () => {
               Sign out
             </button>
           </div>
-        </header>
+          </header>
 
-        <section className="stats-row">
+          <section className="stats-row">
           <div className="stat-card">
             <div className="stat-label">Pending User Confirmations</div>
             <div className="stat-number">{loadingPending ? "..." : pendingCount}</div>
@@ -128,9 +134,9 @@ const AdminDashboard: React.FC = () => {
             <div className="stat-number">21</div>
             <button className="small-btn">Manage</button>
           </div>
-        </section>
+          </section>
 
-        <section className="lists-row">
+          <section className="lists-row">
           <div className="list-card pending-card">
             <h4>Recent Pending Users</h4>
             <div className="table-scroll">
@@ -217,8 +223,8 @@ const AdminDashboard: React.FC = () => {
               </tbody>
             </table>
           </div>
-        </section>
-
+          </section>
+        </div>
       </main>
     </div>
   );

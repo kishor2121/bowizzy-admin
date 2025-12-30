@@ -1,32 +1,54 @@
+/* If a page requests full-bleed, ensure the dashboard fills viewport */
+#root.full-bleed .admin-root {
+  margin: 0;
+  width: 100vw;
+}
+
 .admin-root {
   display: flex;
   min-height: 100vh;
+  width: 100vw; /* ensure it spans full viewport regardless of ancestor constraints */
+  box-sizing: border-box;
+  min-width: 0; /* allow flex children to shrink correctly */
 }
 
 .sidebar {
-  width: 220px;
+  width: 200px; /* slightly narrower to match the desired look */
   background: #fdeee0;
-  padding: 28px 20px;
+  padding: 22px 18px; /* reduce padding so content area grows */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+.sidebar-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 6px 18px rgba(11,21,27,0.04);
+}
+
 .logo {
   font-weight: 800;
   color: #f07a2e;
   font-size: 20px;
+  letter-spacing: 0.6px;
 }
 
 .nav {
-  margin-top: 24px;
+  margin-top: 4px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
-.nav-item { color: #213547; text-decoration: none; cursor: pointer; }
-.nav-item.active { font-weight: 700; }
+.nav-item { color: #213547; text-decoration: none; cursor: pointer; padding: 6px 8px; border-radius: 6px; }
+.nav-item.active { font-weight: 700; background: rgba(240,120,40,0.06); color: #f07a2e }
+
+.sidebar-footer { display:flex; justify-content:flex-start }
 
 .logout-btn {
   background: #fff;
@@ -34,13 +56,30 @@
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
+  width: 100%;
+}
+
+/* Slightly reduce sidebar contents on small screens when it becomes a top bar */
+@media (max-width: 900px) {
+  .sidebar { width: 100%; padding: 12px }
+  .sidebar-card { flex-direction: row; align-items:center; gap: 12px; padding: 8px }
+  .nav { flex-direction: row; gap: 12px }
+  .nav-item { padding: 6px }
+  .logout-btn { max-width: 140px }
 }
 
 .main {
   flex: 1 1 auto;
-  padding: 18px 36px;
+  padding: 28px 48px; /* more breathing room matching the reference */
   box-sizing: border-box;
   background: #f7f7f7;
+  min-width: 0; /* prevents child overflow from causing horizontal scroll */
+}
+
+.main-inner {
+  max-width: 1180px; /* center content width similar to the reference dashboard */
+  margin: 0 auto;
+  width: 100%;
 }
 
 .main-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px }
@@ -50,14 +89,14 @@
 .header-actions { display:flex; gap:8px }
 .pill { border-radius:6px; border:1px solid rgba(0,0,0,0.08); padding:6px 10px; background:#fff }
 
-.stats-row { display:flex; gap:18px; margin-bottom:20px }
-.stat-card { background:#fff; border-radius:10px; padding:18px; flex:1; box-shadow: 0 6px 18px rgba(11,21,27,0.06); min-height:92px; display:flex; flex-direction:column; justify-content:space-between }
+.stats-row { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; margin-bottom:20px }
+.stat-card { background:#fff; border-radius:10px; padding:18px; box-shadow: 0 6px 18px rgba(11,21,27,0.06); min-height:92px; display:flex; flex-direction:column; justify-content:space-between }
 .stat-label { color:#777; font-size:13px }
 .stat-number { font-size:28px; font-weight:700; color:#213547 }
 .small-btn { align-self:flex-start; background: linear-gradient(90deg,#ff8a4a,#ffb25b); border:none; color:#fff; padding:8px 12px; border-radius:6px; cursor:pointer }
 
-.lists-row { display:flex; gap:18px; margin-top:12px }
-.list-card { background:#fff; border-radius:10px; padding:14px; flex:1; box-shadow: 0 6px 18px rgba(11,21,27,0.04) }
+.lists-row { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; margin-top:12px }
+.list-card { background:#fff; border-radius:10px; padding:18px; box-shadow: 0 6px 18px rgba(11,21,27,0.04) }
 .list-card h4 { margin:0 0 12px 0 }
 .list-card table { width:100%; border-collapse: collapse; font-size:13px }
 .list-card th { text-align:left; color:#666; font-weight:600; padding-bottom:8px }

@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout, getInterviewers, confirmInterviewer } from "../services/admin";
 import "./AdminDashboard.css";
 
-const pendingUsers = [
-  { name: "Alice Johnson", email: "alice.johnsonalice@example.com" },
-  { name: "Bob Martin", email: "bob@example.com" },
-  { name: "Cara Lee", email: "cara@example.com" }
-];
+// (removed example pending users — actual pending users are loaded from the API)
 
 const upcomingInterviews = [
   { user: "David G.", slot: "2025-12-28 10:00 AM" },
@@ -56,7 +52,7 @@ const AdminDashboard: React.FC = () => {
         });
         setPendingUsers(pending);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         // show a friendly message (don't leak raw errors)
         setPendingError(err?.response?.data?.message || err?.message || "Failed to load pending users");
       })
@@ -169,7 +165,7 @@ const AdminDashboard: React.FC = () => {
                             await confirmInterviewer(u.user_id);
                             // remove from pending list
                             setPendingUsers((prev) => prev.filter((p) => (p.user_id || p.email) !== id));
-                          } catch (err) {
+                          } catch (err: any) {
                             setPendingError(err?.response?.data?.message || err?.message || "Failed to confirm user");
                           } finally {
                             setConfirmingIds((prev) => prev.filter((x) => x !== id));

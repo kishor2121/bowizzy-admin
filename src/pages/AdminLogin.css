@@ -133,6 +133,12 @@
   font-size: 13px;
 }
 
+.error-text {
+  margin-top: 12px;
+  color: #b00020;
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .login-root { flex-direction: column; }
   .promo-panel { display: none; }

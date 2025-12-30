@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "./AdminLogin.css";
 
 import { useEffect } from "react";
+import { authLogin } from "../services/admin";
 
 const AdminLogin: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const root = document.getElementById("root");
@@ -20,8 +23,18 @@ const AdminLogin: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Replace with real auth logic
-    navigate("/admin/dashboard");
+    // call backend auth endpoint
+    setError(null);
+    setLoading(true);
+    authLogin({ email, password })
+      .then(() => {
+        navigate("/admin/dashboard");
+      })
+      .catch((err) => {
+        const msg = err?.response?.data?.message || err?.message || "Login failed";
+        setError(String(msg));
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -73,9 +86,11 @@ const AdminLogin: React.FC = () => {
               </div>
             </label>
 
-            <button className="submit-btn" type="submit">
-              Login
+            <button className="submit-btn" type="submit" disabled={loading}>
+              {loading ? "Signing in..." : "Login"}
             </button>
+
+            {error && <div className="error-text" role="alert">{error}</div>}
 
             <div className="links-row">
               <a className="link-muted" href="#">Forgot Password?</a>

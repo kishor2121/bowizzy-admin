@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../services/admin";
 import "./AdminDashboard.css";
 
 const pendingUsers = [
@@ -25,6 +27,7 @@ const AdminDashboard: React.FC = () => {
       if (root) root.classList.remove("full-bleed");
     };
   }, []);
+  const navigate = useNavigate();
   return (
     <div className="admin-root">
       <aside className="sidebar">
@@ -36,7 +39,15 @@ const AdminDashboard: React.FC = () => {
           <a className="nav-item">Resumes</a>
         </nav>
 
-        <button className="logout-btn">Logout</button>
+        <button
+          className="logout-btn"
+          onClick={() => {
+            logout();
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
       </aside>
 
       <main className="main">
@@ -49,7 +60,15 @@ const AdminDashboard: React.FC = () => {
           <div className="header-actions">
             <button className="pill">Search</button>
             <button className="pill">Notifications</button>
-            <button className="pill">Sign out</button>
+            <button
+              className="pill"
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+            >
+              Sign out
+            </button>
           </div>
         </header>
 

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPlanStats from "./pages/AdminPlanStats";
+import AdminInterviews from "./pages/AdminInterviews";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         {/* admin dashboard (after login) */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/plans" element={<AdminPlanStats />} />
+        <Route path="/admin/interviews" element={<AdminInterviews />} />
       </Routes>
     </BrowserRouter>
   );

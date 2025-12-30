@@ -42,6 +42,15 @@ export async function getUserPlanStats() {
   return res.data;
 }
 
+export async function getInterviewSlotStats(params: { from: string; to: string; mode?: string }) {
+  const query = new URLSearchParams();
+  if (params.from) query.set("from", params.from);
+  if (params.to) query.set("to", params.to);
+  if (params.mode) query.set("mode", params.mode);
+  const res = await api.get(`/admin/interview-slot-stats?${query.toString()}`);
+  return res.data;
+}
+
 // Helper to set the auth token for subsequent requests
 export function setAuthToken(token?: string | null) {
   setApiAuthToken(token ?? null);

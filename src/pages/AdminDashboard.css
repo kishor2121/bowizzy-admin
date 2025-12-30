@@ -97,6 +97,55 @@
 
 .lists-row { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; margin-top:12px }
 .list-card { background:#fff; border-radius:10px; padding:18px; box-shadow: 0 6px 18px rgba(11,21,27,0.04) }
+.lists-row--interviews { grid-template-columns: 360px 1fr; align-items:start }
+.filter-card { min-width: 320px; max-width: 360px; }
+.slots-card { min-width: 0; }
+
+/* Filter card tweaks */
+.filter-card .field-label { font-size:13px; color:#556; margin-bottom:6px }
+.filter-card .input { width: 100%; }
+.apply-btn { width: 100%; background: linear-gradient(180deg,#FF9D48 0%, #FF8251 100%); color: white; padding: 10px 12px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer }
+.apply-btn:active { transform: translateY(1px) }
+
+/* Filter quick stats (online/offline) */
+.filter-stats { display:flex; gap:12px; margin-top:12px }
+.stat-mini { display:flex; gap:10px; align-items:center; background: #fff; padding:10px 12px; border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.stat-mini-swatch { width:12px; height:12px; border-radius:3px; margin-top:2px }
+.stat-mini-swatch.online { background: #4F46E5 /* purple/online */; }
+.stat-mini-swatch.offline { background: #FF8A4A /* orange/offline */; }
+.stat-mini-label { font-size:13px; color:#555 }
+.stat-mini-value { font-weight:700; font-size:16px; color:#213547 }
+
+/* Slots table styling */
+.slots-card table { width:100%; border-collapse: separate; border-spacing: 0 8px; }
+.slots-card thead th { text-align:left; color:#6b7280; font-weight:600; padding:8px 12px }
+.slots-card tbody tr { background: #fff; border-radius: 8px; box-shadow: 0 1px 0 rgba(0,0,0,0.02); transition: transform 120ms ease, box-shadow 120ms ease; cursor: pointer }
+.slots-card td { padding: 10px 12px; vertical-align: middle; border-bottom: none }
+.slots-card tbody tr:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(16,24,40,0.08) }
+.slot-row { background: linear-gradient(180deg,#fff,#fbfbfd); }
+
+.skill-badge { background: rgba(79,70,229,0.08); color:#4f46e5; padding:4px 8px; border-radius:999px; font-size:12px }
+.action-btn { background: #fff; border:1px solid rgba(79,70,229,0.14); color:#4f46e5; padding:6px 10px; border-radius:8px; cursor:pointer }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; z-index:1200 }
+.modal { background:#fff; border-radius:10px; max-width:720px; width: calc(100% - 48px); padding:18px; box-shadow: 0 20px 50px rgba(2,6,23,0.2) }
+.modal-header { display:flex; justify-content:space-between; align-items:center; gap:8px }
+.modal-body { margin-top:12px; color:#334 }
+.slots-card td:first-child { font-weight:600; color:#1f2937; max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.slots-card td:nth-child(4), .slots-card td:nth-child(5) { font-family: monospace; color:#334; white-space: nowrap }
+.slots-card a.tiny { display:inline-block; padding:6px 10px; border-radius:6px; border:1px solid rgba(0,0,0,0.06); background:#fff; text-decoration:none }
+
+/* Improve scroll look inside slots card */
+.slots-card > div { max-height: 420px; overflow: auto; padding-right: 8px }
+
+/* Responsive: stack filter above table */
+@media (max-width: 1000px) {
+  .lists-row--interviews { grid-template-columns: 1fr; }
+  .filter-card { max-width: none; }
+  .filter-card .input { width: 100%; }
+  .filter-stats { flex-direction: row; flex-wrap:wrap }
+}
 .plan-card { display:flex; gap:14px; align-items:center }
 .pie-wrap { width:120px; height:120px; display:flex; align-items:center; justify-content:center }
 .pie { width:110px; height:110px; border-radius:50%; display:flex; align-items:center; justify-content:center }

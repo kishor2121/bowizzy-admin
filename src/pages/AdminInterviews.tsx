@@ -127,30 +127,6 @@ export default function AdminInterviews() {
     return `${dd}/${mm}/${yy}`;
   };
 
-  const formatHour = (iso?: string) => {
-    if (!iso) return "-";
-    const d = new Date(iso);
-    let h = d.getHours();
-    const ampm = h >= 12 ? "pm" : "am";
-    h = h % 12;
-    if (h === 0) h = 12;
-    return `${h}${ampm}`;
-  };
-
-  const formatFullDateTime = (iso?: string) => {
-    if (!iso) return "-";
-    const d = new Date(iso);
-    const dd = String(d.getDate()).padStart(2, "0");
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const yyyy = d.getFullYear();
-    let h = d.getHours();
-    const m = String(d.getMinutes()).padStart(2, "0");
-    const ampm = h >= 12 ? "PM" : "AM";
-    h = h % 12;
-    if (h === 0) h = 12;
-    return `${dd}/${mm}/${yyyy}, ${h}:${m} ${ampm}`;
-  };
-
   const formatTime = (iso?: string) => {
     if (!iso) return "-";
     const d = new Date(iso);
@@ -247,7 +223,7 @@ export default function AdminInterviews() {
             </div>
 
             <div className="filter-apply">
-              <button className="apply-btn" onClick={fetchSlots}>
+              <button className="apply-btn" onClick={() => fetchSlots()}>
                 Apply
               </button>
             </div>

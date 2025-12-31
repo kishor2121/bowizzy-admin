@@ -1,62 +1,47 @@
 .login-root {
   display: grid;
-  /* default: equal halves for a true split layout */
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: Inter, UI-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont;
 }
-
 .promo-panel {
-  background: #fdeee0; /* light peach */
-  padding: 84px 64px; /* slightly reduced padding so left column doesn't feel too wide */
+  background: #fdeee0;
+  padding: 84px 64px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
 }
 
 .promo-logo {
-  font-weight: 800;
-  color: #f07a2e;
   font-size: 28px;
-}
-
-.promo-content {
-  margin-top: 32px;
+  font-weight: 800;
+  color: #ff7a2b;
 }
 
 .promo-content h2 {
-  color: #d94f00;
   font-size: 56px;
-  margin: 0 0 8px 0;
-  line-height: 1.02;
   font-weight: 800;
-}
-
-.promo-logo {
-  font-weight: 800;
-  color: #ff7a2b;
-  font-size: 28px;
+  color: #d94f00;
+  margin: 0;
+  line-height: 1.05;
 }
 
 .promo-footer {
   font-size: 12px;
-  color: rgba(0,0,0,0.45);
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .form-panel {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: #ffffff;
   padding: 48px 40px;
-  box-sizing: border-box;
 }
 
 .form-card {
   width: 480px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
 .form-title {
@@ -64,72 +49,88 @@
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 22px;
+  color: #000000;
 }
 
 .login-form {
-  background: transparent; /* remove heavy card background to match screenshot */
-  padding: 8px 0 4px 0;
-  border-radius: 6px;
+  padding: 8px 0;
 }
 
 .field {
-  display: block;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .field-label {
-  display: block;
-  font-size: 12px;
-  color: #666;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
   margin-bottom: 6px;
+  display: block;
 }
 
-.input {
+.input,
+.submit-btn {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.08);
+  height: 48px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+
+.input {
+  padding: 12px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background: rgba(226, 238, 255, 0.6);
-  outline: none;
   font-size: 14px;
+
+  color: #000000;       
 }
 
 .input:focus {
-  box-shadow: 0 0 0 3px rgba(56, 120, 255, 0.06);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 120, 255, 0.08);
 }
 
+
 .password-row {
-  display: block;
   position: relative;
 }
-.password-row .input { padding-right: 14px; }
+
+.password-row .input {
+  padding-right: 44px;
+}
+
 .eye-btn {
-  background: transparent;
-  border: none;
   position: absolute;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
-  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.eye-btn svg { display: block; }
+.eye-btn:focus,
+.eye-btn:active {
+  outline: none;
+  box-shadow: none;
+}
 
 .submit-btn {
-  width: 100%;
   margin-top: 18px;
-  padding: 12px;
-  border-radius: 12px;
   border: none;
-  color: white;
   font-weight: 600;
-  background: linear-gradient(180deg,#FF9D48 0%, #FF8251 100%);
+  color: #ffffff;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(255,130,80,0.18);
+  background: linear-gradient(180deg, #ff9d48, #ff8251);
+  box-shadow: 0 6px 18px rgba(255, 130, 80, 0.2);
 }
 
 .links-row {
@@ -139,17 +140,11 @@
 }
 
 .link-muted {
-  color: #f07a2e;
   font-size: 13px;
+  color: #f07a2e;
   text-decoration: none;
 }
 
-.signup-row {
-  text-align: center;
-  margin-top: 18px;
-  color: rgba(0,0,0,0.6);
-  font-size: 13px;
-}
 
 .error-text {
   margin-top: 12px;
@@ -158,20 +153,100 @@
 }
 
 @media (max-width: 900px) {
-  .login-root { flex-direction: column; }
-  .promo-panel { display: none; }
-  .form-panel { padding: 24px; }
-  .form-card { width: 100%; }
+  .login-root {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-panel {
+    display: none;
+  }
+
+  .form-panel {
+    padding: 24px;
+  }
 }
 
-/* Make the promo column a little narrower on very large screens to match the visual */
-@media (min-width: 1400px) {
-  .login-root { grid-template-columns: 1fr 1fr; }
-}
-
-/* If the page is in full-bleed mode, force the login-root to occupy the full viewport and stay split 50/50 */
 #root.full-bleed .login-root {
   width: 100vw;
-  grid-template-columns: 1fr 1fr;
   min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+  .promo-content h2 {
+    font-size: 46px;
+  }
+
+  .promo-panel {
+    padding: 64px 48px;
+  }
+}
+
+@media (max-width: 900px) {
+  .login-root {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-panel {
+    display: none;
+  }
+
+  .form-panel {
+    padding: 32px 24px;
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-title {
+    font-size: 20px;
+  }
+
+  .field-label {
+    font-size: 12px;
+  }
+
+  .input,
+  .submit-btn {
+    height: 46px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .form-panel {
+    padding: 20px 16px;
+  }
+
+  .form-card {
+    max-width: 100%;
+  }
+
+  .input {
+    font-size: 13px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+  }
+
+  .links-row {
+    justify-content: center;
+    margin-top: 12px;
+  }
+}
+
+
+@media (max-width: 360px) {
+  .form-title {
+    font-size: 18px;
+  }
+
+  .input,
+  .submit-btn {
+    height: 44px;
+  }
 }

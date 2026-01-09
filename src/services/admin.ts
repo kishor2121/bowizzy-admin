@@ -84,3 +84,24 @@ export async function authLogin(credentials: { email: string; password: string }
 }
 
 export default { getInterviewers, getUsers, updateUser, confirmInterviewer, getResumes, setAuthToken, loginAdmin, authLogin, logout };
+
+// Pricing endpoints
+export async function getPricing() {
+  const res = await api.get(`/admin/pricing`);
+  return res.data;
+}
+
+export async function createPricing(data: { bowizzy_plan_type: string; amount: number }) {
+  const res = await api.post(`/admin/pricing`, data);
+  return res.data;
+}
+
+export async function updatePricing(id: number | string, data: Record<string, any>) {
+  const res = await api.put(`/admin/pricing/${id}`, data);
+  return res.data;
+}
+
+export async function deletePricing(id: number | string) {
+  const res = await api.delete(`/admin/pricing/${id}`);
+  return res.data;
+}

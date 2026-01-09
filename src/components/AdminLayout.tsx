@@ -82,6 +82,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
                 <span className="nav-icon">💳</span>
                 <span>Plans</span>
               </NavLink>
+              <NavLink
+                to="/admin/pricing"
+                className={({ isActive }) =>
+                  `nav-item ${isActive ? "active" : ""}`
+                }
+              >
+                <span className="nav-icon">💲</span>
+                <span>Pricing</span>
+              </NavLink>
             </div>
           </nav>
         </div>

@@ -4,6 +4,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsers";
 import AdminPlanStats from "./pages/AdminPlanStats";
 import AdminInterviews from "./pages/AdminInterviews";
+import AdminPricing from "./pages/AdminPricing";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/plans" element={<AdminPlanStats />} />
+        <Route path="/admin/pricing" element={<AdminPricing />} />
         <Route path="/admin/interviews" element={<AdminInterviews />} />
       </Routes>
     </BrowserRouter>

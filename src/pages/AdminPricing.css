@@ -1,0 +1,330 @@
+/* =========================
+   PAGE
+========================= */
+.pricing-page {
+  background: #ffffff;
+  padding: 24px;
+  color: #000;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* =========================
+   HEADER
+========================= */
+.pricing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pricing-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-primary {
+  background: #ff8c00;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #e67e00;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.edit-existing {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-color: #ff8c00;
+  color: #ff8c00;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.edit-existing svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-danger {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-danger[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   TABLE
+========================= */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  table-layout: fixed;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.pricing-table th {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #555;
+  letter-spacing: 0.04em;
+}
+
+.pricing-table tr:hover {
+  background: #fafafa;
+}
+
+/* =========================
+   ACTION ICONS
+========================= */
+.actions {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+}
+
+.icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.icon.edit {
+  color: #1a73e8;
+}
+
+.icon.delete {
+  color: #e53935;
+}
+
+/* =========================
+   MODAL BACKDROP
+========================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+/* =========================
+   MODAL CARD
+========================= */
+.pricing-modal {
+  background: #ffffff;
+  width: 380px;
+  max-width: 92%;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.2s ease;
+}
+
+.pricing-modal h3 {
+  margin: 0 0 22px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* =========================
+   FORM FIELDS
+========================= */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #ffffff;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.15);
+}
+
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #ffffff;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.btn-cancel {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* =========================
+   MODAL ACTIONS
+========================= */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   MOBILE CARDS
+========================= */
+.pricing-cards {
+  display: none;
+}
+
+.pricing-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pricing-card strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+}
+
+.pricing-card .amount {
+  margin-top: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-actions {
+  display: flex;
+  gap: 14px;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .table-wrapper {
+    display: none;
+  }
+
+  .pricing-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pricing-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-page {
+    padding: 16px;
+  }
+
+  .pricing-modal {
+    padding: 22px;
+  }
+}

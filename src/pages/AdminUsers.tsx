@@ -29,6 +29,9 @@ const AdminUsers: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchField, setSearchField] = useState<"name" | "email" | "role">("name");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [fromDate, setFromDate] = useState<string>("");
+  const [toDate, setToDate] = useState<string>("");
+  const [exportLoading, setExportLoading] = useState(false);
 
   const ITEMS_PER_PAGE = 5;
 
@@ -200,6 +203,42 @@ const AdminUsers: React.FC = () => {
     setSelectedUser(null);
   };
 
+  const handleExportUsers = async () => {
+    setExportLoading(true);
+    try {
+      const params: any = {};
+      if (fromDate) params.from_date = fromDate;
+      if (toDate) params.to_date = toDate;
+
+      const response = await api.get(`/admin/export-users`, {
+        params,
+        responseType: "blob",
+      });
+
+      // Create a blob URL and trigger download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        `users-export-${new Date().toISOString().split("T")[0]}.xlsx`
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err: any) {
+      console.error("Export error:", err);
+      alert(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Failed to export users"
+      );
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
   const getViewTitle = () => {
     switch (activeView) {
       case "approved-interviewers":
@@ -278,6 +317,41 @@ const AdminUsers: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* EXPORT SECTION - Only visible for All Users */}
+        {activeView === "all-users" && (
+          <div className="export-container">
+            <div className="export-form">
+              <div className="date-input-group">
+                <label htmlFor="from-date">From Date:</label>
+                <input
+                  id="from-date"
+                  type="date"
+                  className="date-input"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                />
+              </div>
+              <div className="date-input-group">
+                <label htmlFor="to-date">To Date:</label>
+                <input
+                  id="to-date"
+                  type="date"
+                  className="date-input"
+                  value={toDate}
+                  onChange={(e) => setToDate(e.target.value)}
+                />
+              </div>
+              <button
+                className="btn primary export-btn"
+                onClick={handleExportUsers}
+                disabled={exportLoading}
+              >
+                {exportLoading ? "Exporting…" : "Export as Excel"}
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* LIST */}
         <div className="card">
